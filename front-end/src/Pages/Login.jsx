@@ -7,7 +7,7 @@ import MyContext from "../Context/Create.Context";
 import axios from "axios";
 
 function Login() {
-  const { setIsLogged } = useContext(MyContext);
+  const { setIsLogged, setRole } = useContext(MyContext);
   const [isDisable, setIsDisable] = useState(true);
   const [isError, setIsError] = useState(false);
   const [errorMessage, setErrorMessage] = useState('');
@@ -39,6 +39,7 @@ function Login() {
       email,
       role,
     }));
+    setRole(role);
   };
 
   const handleClick = async () => {

@@ -7,7 +7,7 @@ import MyContext from "../Context/Create.Context";
 import axios from "axios";
 
 function Register() {
-  const { setIsLogged } = useContext(MyContext);
+  const { setIsLogged, setRole } = useContext(MyContext);
   const [isDisable, setIsDisable] = useState(true);
   const [isError, setIsError] = useState(false);
   const [errorMessage, setErrorMessage] = useState('');
@@ -35,11 +35,12 @@ function Register() {
     setUser({ ...user, [name]: value });
   };
 
-  const saveUser = (email, token) => {
+  const saveUser = (email, role) => {
     localStorage.setItem('user', JSON.stringify({
       email,
-      token,
+      role,
     }));
+    setRole(role);
   };
 
   const handleClick = async () => {
