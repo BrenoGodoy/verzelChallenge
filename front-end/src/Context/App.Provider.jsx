@@ -21,7 +21,7 @@ function ContextProvider({ children }) {
   }
 
   const apiCall = async () => {
-    const req = await fetch('http://localhost:5256/Car');
+    const req = await fetch('http://localhost:5024/Car');
     const data = await req.json();
     setMock(data)
   };
