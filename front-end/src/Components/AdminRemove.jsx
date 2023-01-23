@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import AdminHeader from "./AdminHeader";
+import axios from "axios";
 
 function AdminRemove() {
   const [id, setId] = useState('');
@@ -10,7 +11,8 @@ function AdminRemove() {
   };
 
   const handleClick = () => {
-    // envia a requisição para a api com ID nos headers da requisição;
+    axios.delete(`http://localhost:5024/Car?id=${id}`);
+
     console.log(id)
   };
 
