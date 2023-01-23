@@ -25,6 +25,30 @@ namespace BackEnd.Controllers
             await _context.SaveChangesAsync();
             return Ok(car);
         }
+        [HttpPut]
+        public async Task<IActionResult> EditCar(Car car) {
+            var itemToAdd = _context.Cars.SingleOrDefault(x => x.id == car.id);
+            if (itemToAdd != null) {
+                    itemToAdd.name = car.name;
+                
+    
+                    itemToAdd.brand = car.brand;
+                
+    
+                    itemToAdd.model = car.model;
+                
+    
+                    itemToAdd.image = car.image;
+                
+    
+                    itemToAdd.value = car.value;
+                
+             
+                    itemToAdd.description = car.description;
+            }
+            await _context.SaveChangesAsync();
+            return Ok(car);
+        }
         [HttpDelete]
         public async Task<IActionResult> DeleteCars(int id) {
             var itemToRemove = _context.Cars.SingleOrDefault(x => x.id == id);

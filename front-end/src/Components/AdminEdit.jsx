@@ -1,3 +1,4 @@
+import axios from "axios";
 import React, {useState} from "react";
 import AdminHeader from "./AdminHeader";
 
@@ -18,7 +19,7 @@ function AdminEdit() {
   };
 
   const handleClick = () => {
-    // envia a requisição para a api com CAR nos headers da requisição;
+    axios.put('http://localhost:5024/Car', car);
     console.log(car)
   };
 
@@ -27,7 +28,7 @@ function AdminEdit() {
       <AdminHeader />
       <form className="my-5 mx-5 w-full max-w-lg h-screen bg-gray-800">
           <div>
-            <h1 className="text-sm title-font text-white tracking-widest">Preencha apenas os itens que você quer editar!</h1>
+            <h1 className="text-sm title-font text-white tracking-widest">Editar Veículo</h1>
           </div>
           <div className="relative z-0 w-full mb-6 group">
               <input onChange={handleChange} type="text" id="id" name="id" className="block py-2.5 px-0 w-full text-sm text-white bg-transparent border-0 border-b-2 border-gray-300 appearance-none focus:outline-none focus:ring-0 focus:border-red-600 peer" placeholder=" " required />
