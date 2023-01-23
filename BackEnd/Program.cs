@@ -1,4 +1,14 @@
+using BackEnd.Context;
+using Microsoft.EntityFrameworkCore;
+
 var builder = WebApplication.CreateBuilder(args);
+
+// Conexão com o Banco de Dados
+string ? mySqlConnection = builder.Configuration.GetConnectionString("DefaultConnection");
+
+builder.Services.AddDbContextPool<AppDbContext>(options => 
+    options.UseMySql(mySqlConnection,
+        ServerVersion.AutoDetect(mySqlConnection)));
 
 // Add services to the container.
 
