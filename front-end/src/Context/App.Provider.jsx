@@ -1,6 +1,7 @@
 import React, { useState, useMemo, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import MyContext from './Create.Context';
+import axios from 'axios';
 
 function ContextProvider({ children }) {
   const [isLogged, setIsLogged] = useState(false)
@@ -21,9 +22,9 @@ function ContextProvider({ children }) {
   }
 
   const apiCall = async () => {
-    const req = await fetch('http://localhost:5024/Car');
-    const data = await req.json();
-    setMock(data)
+    const req = await axios.get('http://localhost:5024/Car');
+    console.log(req);
+    setMock(req.data);
   };
 
   useEffect(() => {

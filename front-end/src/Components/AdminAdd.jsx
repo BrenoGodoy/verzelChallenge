@@ -1,3 +1,4 @@
+import axios from "axios";
 import React, { useState } from "react";
 import AdminHeader from "./AdminHeader";
 
@@ -17,8 +18,13 @@ function AdminAdd() {
   };
 
   const handleClick = () => {
-    // envia a requisição para a api com CAR nos headers da requisição;
-    console.log(car)
+    axios.post('http://localhost:5024/Car', car)
+    .then(() => {
+      console.log("Veículo Adicionado!")
+    })
+    .catch((e) => {
+      console.log(e.message);
+    });
   };
 
   return (
