@@ -2,11 +2,11 @@ import React from "react";
 import noImg from "../Images/sem-foto.jpg"
 import { Link } from 'react-router-dom'
 
-function Cards({ mock }) {
+function Cards({ data }) {
 
   return (
     <section className="my-5 flex flex-wrap justify-evenly bg-gray-800">
-      {mock.map((car) => {
+      {data.map((car) => {
         return (
           <div key={car.id} className="w-full my-3 max-w-sm bg-gray-200 rounded-lg shadow-md">
             <Link to={`/car/${car.id}`}>

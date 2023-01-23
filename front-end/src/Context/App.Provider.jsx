@@ -5,7 +5,7 @@ import axios from 'axios';
 
 function ContextProvider({ children }) {
   const [isLogged, setIsLogged] = useState(false)
-  const [mock, setMock] = useState([]);
+  const [data, setData] = useState([]);
 
   const verifyIsLogged = () => {
     const user = JSON.parse(localStorage.getItem('user'));
@@ -24,7 +24,7 @@ function ContextProvider({ children }) {
   const apiCall = async () => {
     const req = await axios.get('http://localhost:5024/Car');
     console.log(req);
-    setMock(req.data);
+    setData(req.data);
   };
 
   useEffect(() => {
@@ -34,12 +34,12 @@ function ContextProvider({ children }) {
 
   const context = useMemo(
     () => ({
-      mock,
-      setMock,
+      data,
+      setData,
       isLogged,
       setIsLogged
     }),
-    [mock, isLogged],
+    [data, isLogged],
   );
 
   return (
