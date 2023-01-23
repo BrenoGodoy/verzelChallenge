@@ -4,7 +4,8 @@ import { useEffect } from "react";
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom"
 import MyContext from "../Context/Create.Context";
-import requestLogin from "../Services/requestLogin";
+// import requestLogin from "../Services/requestLogin";
+import axios from "axios";
 
 function Login() {
   const { setIsLogged } = useContext(MyContext);
@@ -34,32 +35,28 @@ function Login() {
     setUser({ ...user, [name]: value });
   };
 
-  const saveUser = (email, token) => {
+  const saveUser = (email, role) => {
     localStorage.setItem('user', JSON.stringify({
       email,
-      token,
+      role,
     }));
   };
 
-  const handleClick = () => {
+  const handleClick = async () => {
       // Chama a api, se tudo ok, loga e recebe token JWT que será salvo no localStorage para ser usado posteriormente no CRUD de carros.
       const { email, password } = user; // password será usado depois também
-
-      requestLogin(email, password)
-      .then(({ data }) => {
-        saveUser(data);
+      const request = await axios.post('http://localhost:5024/Login', {email, password});
+      console.log(request);
+      if (request.status === 200) {
+        saveUser({email: request.data.email, role: request.data.role});
         setIsLogged(true);
         navigate('/');
-      })
-    .catch((error) => {
-      setIsError(false);
-      setIsError(false);
-      setIsError(true);
-      setErrorMessage(error.response.data.message);
-    });
-    saveUser(email, 'tokenTeste')
-    setIsLogged(true);
-    navigate('/');
+      } else {
+        setIsError(false);
+        setIsError(false);
+        setIsError(true);
+        setErrorMessage(request.statusText);
+      }
   }
 
   useEffect(() => {
