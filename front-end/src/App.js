@@ -7,6 +7,7 @@ import Admin from './Pages/Admin';
 import AdminAdd from './Components/AdminAdd';
 import AdminEdit from './Components/AdminEdit';
 import AdminRemove from './Components/AdminRemove';
+import Register from './Pages/Register';
 
 function App() {
   return (
@@ -15,6 +16,7 @@ function App() {
     <Routes>
       <Route path="/" element= {<Home />}/>
       <Route path='/login' element={<Login />}/>
+      <Route path='/register' element={<Register />}/>
       <Route path='/car/:id' element={<Car />}/>
       <Route path="/admin" element= {<Admin />}/>
       <Route path="/admin/add" element= {<AdminAdd />}/>
