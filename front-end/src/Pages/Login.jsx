@@ -47,7 +47,7 @@ function Login() {
       const request = await axios.post('http://localhost:5024/Login', {email, password});
       console.log(request);
       if (request.status === 200) {
-        saveUser({email: request.data.email, role: request.data.role});
+        saveUser(request.data.email, request.data.role);
         setIsLogged(true);
         navigate('/');
       } else {

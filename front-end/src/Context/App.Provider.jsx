@@ -5,16 +5,23 @@ import axios from 'axios';
 
 function ContextProvider({ children }) {
   const [isLogged, setIsLogged] = useState(false)
+  const [role, setRole] = useState('');
   const [data, setData] = useState([]);
 
   const verifyIsLogged = () => {
     const user = JSON.parse(localStorage.getItem('user'));
     // Aqui vai rolar uma requisição para a api para verificar o token salvo no localStorage
     try {
-      if (user.token) {
+      if (user.role === 'Admin') {
+        console.log('adm');
         setIsLogged(true)
+        setRole('Admin');
+      } else if (user.role === 'User') {
+        console.log('user');
+        setIsLogged(true);
+        setRole('User');
       } else {
-        setIsLogged(false)
+        setIsLogged(false);
       }
     } catch (error) {
       console.log(error.message)
@@ -37,9 +44,11 @@ function ContextProvider({ children }) {
       data,
       setData,
       isLogged,
-      setIsLogged
+      setIsLogged,
+      role, 
+      setRole
     }),
-    [data, isLogged],
+    [data, isLogged, role],
   );
 
   return (
