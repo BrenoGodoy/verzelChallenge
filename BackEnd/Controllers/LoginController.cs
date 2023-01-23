@@ -8,18 +8,18 @@ namespace BackEnd.Controllers
     [ApiController]
     [Route("[controller]")]
 
-    public class UserController : ControllerBase
+    public class LoginController : ControllerBase
     {
         private readonly AppDbContext _context;
 
-        public UserController(AppDbContext context) {
+        public LoginController(AppDbContext context) {
             _context = context;
         }
+
         [HttpPost]
-        public async Task<IActionResult> AddUsers(User user) {
-            _context.Add(user);
-            await _context.SaveChangesAsync();
-            return Ok(user);
+        public IActionResult GetByIdUser(User user) {
+            var userToGet = _context.Users.SingleOrDefault(x => x.email == user.email && x.password == user.password);
+            return Ok(userToGet);
         }
     }
 }
