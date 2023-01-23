@@ -4,12 +4,13 @@ import { useEffect } from "react";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom"
 import MyContext from "../Context/Create.Context";
+import requestLogin from "../Services/requestLogin";
 
 function Login() {
   const { setIsLogged } = useContext(MyContext);
   const [isDisable, setIsDisable] = useState(true);
-  const [isError] = useState(false); // setIsError será adicionado também
-  // const [errorMessage, setErrorMessage] = useState('');
+  const [isError, setIsError] = useState(false); // setIsError será adicionado também
+  const [errorMessage, setErrorMessage] = useState('');
   const [user, setUser] = useState({
     email: '',
     password: ''
@@ -42,20 +43,20 @@ function Login() {
 
   const handleClick = () => {
       // Chama a api, se tudo ok, loga e recebe token JWT que será salvo no localStorage para ser usado posteriormente no CRUD de carros.
-      const { email } = user; // password será usado depois também
+      const { email, password } = user; // password será usado depois também
 
-    //   requestLogin(email, password)
-    //   .then(({ data }) => {
-    //     saveUser(data);
-    //     setIsLogged(true);
-    //     navigate('/');
-    //   })
-    // .catch((error) => {
-    //   setIsError(false);
-    //   setIsError(false);
-    //   setIsError(true);
-    //   setErrorMessage(error.response.data.message);
-    // });
+      requestLogin(email, password)
+      .then(({ data }) => {
+        saveUser(data);
+        setIsLogged(true);
+        navigate('/');
+      })
+    .catch((error) => {
+      setIsError(false);
+      setIsError(false);
+      setIsError(true);
+      setErrorMessage(error.response.data.message);
+    });
     saveUser(email, 'tokenTeste')
     setIsLogged(true);
     navigate('/');
@@ -91,7 +92,7 @@ function Login() {
                   Erro!
                 </div>
                 <div className="border border-t-0 border-red-400 rounded-b bg-red-100 px-4 py-3 text-red-700">
-                  <p>Something not ideal might be happening.</p>
+                  <p>{errorMessage}</p>
                 </div>
               </div>}
             </form>
