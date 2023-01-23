@@ -4,12 +4,12 @@ import { useEffect } from "react";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom"
 import MyContext from "../Context/Create.Context";
-import requestLogin from "../Services/requestLogin";
+import axios from "axios";
 
 function Register() {
   const { setIsLogged } = useContext(MyContext);
   const [isDisable, setIsDisable] = useState(true);
-  const [isError, setIsError] = useState(false); // setIsError será adicionado também
+  const [isError, setIsError] = useState(false);
   const [errorMessage, setErrorMessage] = useState('');
   const [user, setUser] = useState({
     email: '',
@@ -42,25 +42,21 @@ function Register() {
     }));
   };
 
-  const handleClick = () => {
+  const handleClick = async () => {
       // Chama a api, se tudo ok, registra, loga e recebe token JWT que será salvo no localStorage para ser usado posteriormente no CRUD de carros.
-      const { email, password } = user; // password será usado depois também
-
-      requestLogin(email, password)
-      .then(({ data }) => {
-        saveUser(data);
+      const { email, password, role } = user;
+      const request = await axios.post('http://localhost:5024/User', {email, password, role});
+      console.log(request);
+      if (request.status === 200) {
+        saveUser({email: request.data.email, role: request.data.role});
         setIsLogged(true);
         navigate('/');
-      })
-    .catch((error) => {
-      setIsError(false);
-      setIsError(false);
-      setIsError(true);
-      setErrorMessage(error.response.data.message);
-    });
-    saveUser(email, 'tokenTeste')
-    setIsLogged(true);
-    navigate('/');
+      } else {
+        setIsError(false);
+        setIsError(false);
+        setIsError(true);
+        setErrorMessage(request.statusText);
+      }
   }
 
   useEffect(() => {
@@ -89,7 +85,7 @@ function Register() {
               </div>
               <div className="my-3">
                 <label htmlFor="repeat-password" className="block mb-2 text-sm font-medium text-gray-900">Repetir Senha</label>
-                <input type="repeat-password" name="repeat-password" id="repeat-password" className="bg-gray-100 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 hover:bg-gray-50" placeholder="Sua senha"  
+                <input type="password" name="repeat-password" id="repeat-password" className="bg-gray-100 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 hover:bg-gray-50" placeholder="Sua senha"  
                 />
               </div>
               <h3 className="mb-4 my-5 font-semibold text-black">Função na Página:</h3>

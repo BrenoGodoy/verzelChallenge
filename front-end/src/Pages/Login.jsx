@@ -4,13 +4,12 @@ import { useEffect } from "react";
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom"
 import MyContext from "../Context/Create.Context";
-// import requestLogin from "../Services/requestLogin";
 import axios from "axios";
 
 function Login() {
   const { setIsLogged } = useContext(MyContext);
   const [isDisable, setIsDisable] = useState(true);
-  const [isError, setIsError] = useState(false); // setIsError será adicionado também
+  const [isError, setIsError] = useState(false);
   const [errorMessage, setErrorMessage] = useState('');
   const [user, setUser] = useState({
     email: '',
@@ -44,7 +43,7 @@ function Login() {
 
   const handleClick = async () => {
       // Chama a api, se tudo ok, loga e recebe token JWT que será salvo no localStorage para ser usado posteriormente no CRUD de carros.
-      const { email, password } = user; // password será usado depois também
+      const { email, password } = user;
       const request = await axios.post('http://localhost:5024/Login', {email, password});
       console.log(request);
       if (request.status === 200) {
