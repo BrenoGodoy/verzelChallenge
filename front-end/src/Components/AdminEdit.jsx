@@ -19,7 +19,12 @@ function AdminEdit() {
   };
 
   const handleClick = () => {
-    axios.put('http://localhost:5024/Car', car);
+    const token = JSON.parse(localStorage.getItem('user'));
+    axios.put('http://localhost:5024/Car', car, {
+      headers: {
+        'Authorization': token.token 
+      }
+     });
     console.log(car)
   };
 

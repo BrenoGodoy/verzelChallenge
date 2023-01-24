@@ -17,8 +17,13 @@ function AdminAdd() {
     setCar({ ...car, [name]: value });
   };
 
-  const handleClick = () => {
-    axios.post('http://localhost:5024/Car', car)
+  const handleClick = async () => {
+    const token = JSON.parse(localStorage.getItem('user'));
+    await axios.post('http://localhost:5024/Car', car, {
+      headers: {
+        'Authorization': token.token 
+     }
+    })
     .then(() => {
       console.log("Veículo Adicionado!")
     })

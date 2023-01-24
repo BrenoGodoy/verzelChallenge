@@ -11,7 +11,12 @@ function AdminRemove() {
   };
 
   const handleClick = () => {
-    axios.delete(`http://localhost:5024/Car?id=${id}`);
+    const token = JSON.parse(localStorage.getItem('user'));
+    axios.delete(`http://localhost:5024/Car?id=${id}`, {
+      headers: {
+        'Authorization': token.token 
+     }
+    });
 
     console.log(id)
   };
