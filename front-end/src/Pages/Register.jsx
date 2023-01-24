@@ -7,14 +7,13 @@ import MyContext from "../Context/Create.Context";
 import axios from "axios";
 
 function Register() {
-  const { setIsLogged, setRole } = useContext(MyContext);
+  const { setIsLogged } = useContext(MyContext);
   const [isDisable, setIsDisable] = useState(true);
   const [isError, setIsError] = useState(false);
   const [errorMessage, setErrorMessage] = useState('');
   const [user, setUser] = useState({
     email: '',
     password: '',
-    role: ''
   });
   const navigate = useNavigate();
 
@@ -35,24 +34,22 @@ function Register() {
     setUser({ ...user, [name]: value });
   };
 
-  const saveUser = (email, role, token) => {
+  const saveUser = (email, token) => {
     localStorage.setItem('user', JSON.stringify({
       email,
-      role,
       token: `Bearer ${token}`
     }));
-    setRole(role);
   };
 
   const handleClick = async () => {
       // Chama a api, se tudo ok, registra, loga e recebe token JWT que será salvo no localStorage para ser usado posteriormente no CRUD de carros.
-      const { email, password, role } = user;
-      const request = await axios.post('http://localhost:5024/User', {email, password, role});
+      const { email, password } = user;
+      const request = await axios.post('http://localhost:5024/User', {email, password});
       console.log(request);
       if (request.status === 200) {
         const login = await axios.post('http://localhost:5024/Login', {email, password});
         if (login.status === 200) {
-          saveUser(request.data.email, request.data.role, login.data.token.token);
+          saveUser(request.data.email, login.data.token.token);
           setIsLogged(true);
           navigate('/');
         }

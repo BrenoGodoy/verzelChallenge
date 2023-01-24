@@ -7,7 +7,7 @@ import MyContext from "../Context/Create.Context";
 import axios from "axios";
 
 function Login() {
-  const { setIsLogged, setRole } = useContext(MyContext);
+  const { setIsLogged } = useContext(MyContext);
   const [isDisable, setIsDisable] = useState(true);
   const [isError, setIsError] = useState(false);
   const [errorMessage, setErrorMessage] = useState('');
@@ -34,13 +34,11 @@ function Login() {
     setUser({ ...user, [name]: value });
   };
 
-  const saveUser = (email, role, token) => {
+  const saveUser = (email , token) => {
     localStorage.setItem('user', JSON.stringify({
       email,
-      role,
       token: `Bearer ${token}`
     }));
-    setRole(role);
   };
 
   const handleClick = async () => {
@@ -50,7 +48,7 @@ function Login() {
         const request = await axios.post('http://localhost:5024/Login', {email, password});
         console.log(request);
         if (request.status === 200) {
-          saveUser(request.data.email, request.data.role, request.data.token.token);
+          saveUser(request.data.email, request.data.token.token);
           setIsLogged(true);
           navigate('/');
          } 

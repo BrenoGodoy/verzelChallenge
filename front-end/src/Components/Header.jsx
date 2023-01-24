@@ -5,16 +5,14 @@ import { Link } from 'react-router-dom'
 import MyContext from "../Context/Create.Context";
 
 function Header() {
-  const { isLogged, setIsLogged, setRole } = useContext(MyContext);
-  const { role } = useContext(MyContext);
+  const { isLogged, setIsLogged } = useContext(MyContext);
   const handleClick = () => {
     setIsLogged(false);
-    setRole('');
     localStorage.clear();
   };
 
   useEffect(() =>{
-    console.log('Header useEffect', isLogged, role);
+    console.log('Header useEffect', isLogged);
   });
 
   return(
