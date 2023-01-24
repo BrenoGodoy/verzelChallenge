@@ -17,6 +17,7 @@ namespace BackEnd.Controllers
         }
         [HttpPost]
         public async Task<IActionResult> AddUsers(User user) {
+            // Aqui a senha seria criptografada normalmente, para ser salva no BD //
             _context.Add(user);
             await _context.SaveChangesAsync();
             return Ok(user);

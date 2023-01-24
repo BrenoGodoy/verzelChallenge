@@ -23,7 +23,7 @@ namespace BackEnd.Controllers
                 return NotFound("Usuário Inválido");
             }
             var token = TokenService.GenerateToken(userToGet);
-            return Ok(new {email = userToGet.email, role = userToGet.role, token});
+            return Ok(new {email = userToGet.email, token});
         }
     }
 }
