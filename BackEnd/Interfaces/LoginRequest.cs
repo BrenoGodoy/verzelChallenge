@@ -1,9 +1,10 @@
 namespace BackEnd.Interfaces
 {
-    public interface LoginRequest
+    public struct LoginRequest
     {
         public string email {get; set;}
-        public string password {get; set;}
+        public string token {get; set;}
 
+        public string role {get; set;}
     }
 }

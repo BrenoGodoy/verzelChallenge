@@ -1,5 +1,9 @@
 using BackEnd.Context;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.IdentityModel.Tokens;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using System.Text;
+using BackEnd;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -9,6 +13,25 @@ string ? mySqlConnection = builder.Configuration.GetConnectionString("DefaultCon
 builder.Services.AddDbContextPool<AppDbContext>(options => 
     options.UseMySql(mySqlConnection,
         ServerVersion.AutoDetect(mySqlConnection)));
+
+// Adiciona JWT à api
+var key = Encoding.ASCII.GetBytes(Key.Secret);
+
+builder.Services.AddAuthentication(x => {
+  x.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+  x.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+
+}).AddJwtBearer(x => {
+    x.RequireHttpsMetadata = false;
+    x.SaveToken = true;
+    x.TokenValidationParameters = new TokenValidationParameters
+    {
+        ValidateIssuerSigningKey = true,
+        IssuerSigningKey = new SymmetricSecurityKey(key),
+        ValidateIssuer = false,
+        ValidateAudience = false
+    };
+});
 
 // Add services to the container.
 builder.Services.AddCors();

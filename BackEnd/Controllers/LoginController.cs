@@ -1,7 +1,7 @@
 using BackEnd.Context;
 using BackEnd.Models;
 using Microsoft.AspNetCore.Mvc;
-using BackEnd.Interfaces;
+using BackEnd.Services;
 
 namespace BackEnd.Controllers
 {
@@ -19,7 +19,11 @@ namespace BackEnd.Controllers
         [HttpPost]
         public IActionResult GetByIdUser(User user) {
             var userToGet = _context.Users.SingleOrDefault(x => x.email == user.email && x.password == user.password);
-            return Ok(userToGet);
+            if (userToGet == null) {
+                return BadRequest("Usuário Inválido");
+            }
+            var token = TokenService.GenerateToken(userToGet);
+            return Ok(new {email = userToGet.email, role = userToGet.role, token});
         }
     }
 }

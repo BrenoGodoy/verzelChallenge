@@ -41,3 +41,11 @@
 /home/breno/verzel/verzel-challenge/BackEnd/obj/Debug/net7.0/BackEnd.pdb
 /home/breno/verzel/verzel-challenge/BackEnd/obj/Debug/net7.0/BackEnd.genruntimeconfig.cache
 /home/breno/verzel/verzel-challenge/BackEnd/obj/Debug/net7.0/ref/BackEnd.dll
+/home/breno/verzel/verzel-challenge/BackEnd/bin/Debug/net7.0/Microsoft.AspNetCore.Authentication.JwtBearer.dll
+/home/breno/verzel/verzel-challenge/BackEnd/bin/Debug/net7.0/Microsoft.IdentityModel.Abstractions.dll
+/home/breno/verzel/verzel-challenge/BackEnd/bin/Debug/net7.0/Microsoft.IdentityModel.JsonWebTokens.dll
+/home/breno/verzel/verzel-challenge/BackEnd/bin/Debug/net7.0/Microsoft.IdentityModel.Logging.dll
+/home/breno/verzel/verzel-challenge/BackEnd/bin/Debug/net7.0/Microsoft.IdentityModel.Protocols.dll
+/home/breno/verzel/verzel-challenge/BackEnd/bin/Debug/net7.0/Microsoft.IdentityModel.Protocols.OpenIdConnect.dll
+/home/breno/verzel/verzel-challenge/BackEnd/bin/Debug/net7.0/Microsoft.IdentityModel.Tokens.dll
+/home/breno/verzel/verzel-challenge/BackEnd/bin/Debug/net7.0/System.IdentityModel.Tokens.Jwt.dll
