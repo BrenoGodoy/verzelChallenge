@@ -18,7 +18,7 @@ function Home() {
   return(
     <div className="bg-gray-800 h-screen">
       <div className="bg-gray-800">
-        <input className="w-full my-3 bg-gray-100 text-gray-900 p-2.5 hover:bg-gray-50" type="text" placeholder="Busque por marca, modelo, ano..."/>
+        <h1 className="text-5xl my-5 mx-3 title-font text-white tracking-widest">Nossos Veículos: </h1>
       </div>
       <Cards data={data}/>
     </div>
