@@ -33,6 +33,8 @@ builder.Services.AddAuthentication(x => {
     };
 });
 
+// builder.Services.AddAuthentication();
+
 // Add services to the container.
 builder.Services.AddCors();
 builder.Services.AddControllers();
@@ -57,8 +59,8 @@ app.UseCors(x => {
     x.AllowAnyOrigin();
 });
 
+app.UseAuthentication();
 app.UseAuthorization();
-
 app.MapControllers();
 
 app.Run();

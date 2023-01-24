@@ -1,5 +1,6 @@
 using BackEnd.Context;
 using BackEnd.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace BackEnd.Controllers
@@ -19,12 +20,14 @@ namespace BackEnd.Controllers
         public IActionResult GetAllCars() {
             return Ok(_context.Cars);
         }
+        [Authorize]
         [HttpPost]
         public async Task<IActionResult> AddCars(Car car) {
             _context.Add(car);
             await _context.SaveChangesAsync();
             return Ok(car);
         }
+        [Authorize]
         [HttpPut]
         public async Task<IActionResult> EditCar(Car car) {
             var itemToAdd = _context.Cars.SingleOrDefault(x => x.id == car.id);
@@ -49,6 +52,7 @@ namespace BackEnd.Controllers
             await _context.SaveChangesAsync();
             return Ok(car);
         }
+        [Authorize]
         [HttpDelete]
         public async Task<IActionResult> DeleteCars(int id) {
             var itemToRemove = _context.Cars.SingleOrDefault(x => x.id == id);

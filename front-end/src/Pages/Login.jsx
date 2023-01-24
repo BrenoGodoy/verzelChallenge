@@ -38,7 +38,7 @@ function Login() {
     localStorage.setItem('user', JSON.stringify({
       email,
       role,
-      token
+      token: `Bearer ${token}`
     }));
     setRole(role);
   };

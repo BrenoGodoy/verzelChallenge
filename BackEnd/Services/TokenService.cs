@@ -15,9 +15,9 @@ namespace BackEnd.Services
             {
                 Subject = new System.Security.Claims.ClaimsIdentity(new Claim []
                 {
-                    new Claim("userRole", user.role),
+                    new Claim("userEmail", user.email),
                 }),
-                Expires = DateTime.UtcNow.AddHours(3),
+                Expires = DateTime.UtcNow.AddHours(24),
                 SigningCredentials = new SigningCredentials(new SymmetricSecurityKey(key), SecurityAlgorithms.HmacSha256Signature)
             };
 

@@ -35,10 +35,11 @@ function Register() {
     setUser({ ...user, [name]: value });
   };
 
-  const saveUser = (email, role) => {
+  const saveUser = (email, role, token) => {
     localStorage.setItem('user', JSON.stringify({
       email,
       role,
+      token: `Bearer ${token}`
     }));
     setRole(role);
   };
@@ -49,9 +50,12 @@ function Register() {
       const request = await axios.post('http://localhost:5024/User', {email, password, role});
       console.log(request);
       if (request.status === 200) {
-        saveUser(request.data.email, request.data.role);
-        setIsLogged(true);
-        navigate('/');
+        const login = await axios.post('http://localhost:5024/Login', {email, password});
+        if (login.status === 200) {
+          saveUser(request.data.email, request.data.role, login.data.token.token);
+          setIsLogged(true);
+          navigate('/');
+        }
       } else {
         setIsError(false);
         setIsError(false);
