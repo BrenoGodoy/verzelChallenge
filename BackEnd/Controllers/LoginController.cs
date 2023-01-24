@@ -20,7 +20,7 @@ namespace BackEnd.Controllers
         public IActionResult GetByIdUser(User user) {
             var userToGet = _context.Users.SingleOrDefault(x => x.email == user.email && x.password == user.password);
             if (userToGet == null) {
-                return BadRequest("Usuário Inválido");
+                return NotFound("Usuário Inválido");
             }
             var token = TokenService.GenerateToken(userToGet);
             return Ok(new {email = userToGet.email, role = userToGet.role, token});

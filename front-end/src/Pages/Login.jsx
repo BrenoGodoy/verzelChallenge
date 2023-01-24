@@ -34,10 +34,11 @@ function Login() {
     setUser({ ...user, [name]: value });
   };
 
-  const saveUser = (email, role) => {
+  const saveUser = (email, role, token) => {
     localStorage.setItem('user', JSON.stringify({
       email,
       role,
+      token
     }));
     setRole(role);
   };
@@ -45,17 +46,20 @@ function Login() {
   const handleClick = async () => {
       // Chama a api, se tudo ok, loga e recebe token JWT que será salvo no localStorage para ser usado posteriormente no CRUD de carros.
       const { email, password } = user;
-      const request = await axios.post('http://localhost:5024/Login', {email, password});
-      console.log(request);
-      if (request.status === 200) {
-        saveUser(request.data.email, request.data.role);
-        setIsLogged(true);
-        navigate('/');
-      } else {
+      try {
+        const request = await axios.post('http://localhost:5024/Login', {email, password});
+        console.log(request);
+        if (request.status === 200) {
+          saveUser(request.data.email, request.data.role, request.data.token.token);
+          setIsLogged(true);
+          navigate('/');
+         } 
+      }
+      catch (e) { 
         setIsError(false);
         setIsError(false);
         setIsError(true);
-        setErrorMessage(request.statusText);
+        setErrorMessage(e.message);
       }
   }
 
