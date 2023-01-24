@@ -9,7 +9,6 @@ function Car() {
   const { id } = useParams();
 
   useEffect(() => {
-    console.log(data);
     const finder = data.find((car) => car.id === parseInt(id));
     setDataFind(finder);
   }, [id, data]);

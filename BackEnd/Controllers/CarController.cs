@@ -59,9 +59,9 @@ namespace BackEnd.Controllers
             if (itemToRemove != null) {
                 _context.Cars.Remove(itemToRemove);
                 await _context.SaveChangesAsync();
-                return Ok('1');
+                return Ok("Item removido");
             }
-            return BadRequest('2');
+            return BadRequest("Algo deu errado!");
         }
     }
 }

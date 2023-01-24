@@ -23,7 +23,6 @@ function ContextProvider({ children }) {
 
   const apiCall = async () => {
     const req = await axios.get('http://localhost:5024/Car');
-    console.log(req);
     setData(req.data);
   };
 

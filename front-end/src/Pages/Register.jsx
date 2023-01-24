@@ -30,7 +30,6 @@ function Register() {
 
   const handleChange = ({ target }) => {
     const { name, value } = target;
-    console.log(name, value)
     setUser({ ...user, [name]: value });
   };
 
@@ -45,7 +44,6 @@ function Register() {
       // Chama a api, se tudo ok, registra, loga e recebe token JWT que será salvo no localStorage para ser usado posteriormente no CRUD de carros.
       const { email, password } = user;
       const request = await axios.post('http://localhost:5024/User', {email, password});
-      console.log(request);
       if (request.status === 200) {
         const login = await axios.post('http://localhost:5024/Login', {email, password});
         if (login.status === 200) {

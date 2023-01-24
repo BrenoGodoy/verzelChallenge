@@ -30,7 +30,6 @@ function Login() {
 
   const handleChange = ({ target }) => {
     const { name, value } = target;
-    console.log(name, value)
     setUser({ ...user, [name]: value });
   };
 
@@ -46,7 +45,6 @@ function Login() {
       const { email, password } = user;
       try {
         const request = await axios.post('http://localhost:5024/Login', {email, password});
-        console.log(request);
         if (request.status === 200) {
           saveUser(request.data.email, request.data.token.token);
           setIsLogged(true);

@@ -14,7 +14,6 @@ function AdminEdit() {
 
   const handleChange = ({ target }) => {
     const { name, value } = target;
-    console.log(name, value)
     setCar({ ...car, [name]: value });
   };
 
@@ -25,7 +24,6 @@ function AdminEdit() {
         'Authorization': token.token 
       }
      });
-    console.log(car)
   };
 
   return (

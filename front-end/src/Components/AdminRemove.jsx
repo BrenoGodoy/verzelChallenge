@@ -17,8 +17,6 @@ function AdminRemove() {
         'Authorization': token.token 
      }
     });
-
-    console.log(id)
   };
 
   return (
