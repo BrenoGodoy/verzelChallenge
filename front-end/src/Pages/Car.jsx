@@ -27,7 +27,7 @@ function Car() {
             </div>
             <div className="flex">
               <span className="title-font font-medium text-2xl text-white">{`R$ ${dataFind.value}`}</span>
-              <button className="flex ml-auto text-white bg-red-600 border-0 py-2 px-6 focus:outline-none hover:bg-red-600 rounded">Button</button>
+              <button className="flex ml-auto text-white bg-red-600 border-0 py-2 px-6 focus:outline-none hover:bg-red-600 rounded">Comprar</button>
             </div>
           </div>
         </div>
