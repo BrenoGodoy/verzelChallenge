@@ -3,6 +3,8 @@
 
 Um catálogo de veículos a venda feito em Reactjs (front) e .net 7 (back). No APP você pode fazer login como administrador e isso libera uma página de admin com um CRUD dos veículos registrados na página. Todas as requisições do CRUD utilizam um token JWT para autorizar a requisição, logo só usuarios logados conseguem fazer essas edições.
 
+Assim que entrar no APP não haverão nem veículos nem admins criados. Logo a primeira coisa a se fazer é clicar em Login como Administrador no canto superior direito e clique em registrar abaixo da aba de Login. Crie seu usuário e você será redirecionado para a HOME da página. No canto superior direito deverá ter um botão "Página do Administrador" que direciona para o CRUD de carros e um botão "Sair" que desloga o usuário. A página do Administrador tem 4 funções bem intuitivas que devem ser realizadas apenas se o token JWT do usuário for válido. Após realizar a ação, é só ir até a Home ou a página de listar veículos e verificar se a alteração ou adição foi realizada.
+
 
 ## Antes de iniciar o projeto
  
