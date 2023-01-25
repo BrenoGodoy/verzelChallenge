@@ -1,17 +1,25 @@
-import React, {useState, useEffect, useContext} from "react";
+import React, {useState, useEffect} from "react";
 import { useParams } from "react-router-dom";
-import MyContext from "../Context/Create.Context";
+import axios from "axios";
 
 function Car() {
-  const { data } = useContext(MyContext);
+  // const [ data, setData ] = useState([]);
 
   const [dataFind, setDataFind] = useState({});
   const { id } = useParams();
 
+  const apiCall = async () => {
+    const req = await axios.get('http://localhost:5024/Car');
+    console.log('entrou');
+    return req.data;
+  };
+
   useEffect(() => {
-    const finder = data.find((car) => car.id === parseInt(id));
-    setDataFind(finder);
-  }, [id, data]);
+    apiCall().then(e => {
+      const finder = e.find((car) => car.id === parseInt(id));
+      setDataFind(finder);
+    });
+  }, [id]);
   return (
     <section className="text-gray-700 body-font overflow-hidden bg-gray-800 h-screen">
       <div className="container px-5 py-24 mx-auto">
